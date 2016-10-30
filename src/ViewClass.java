@@ -1,34 +1,17 @@
 import java.awt.EventQueue;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-
 import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.View;
-
-import jaco.mp3.player.MP3Player;
-
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class ViewClass {
-	MP3Player mp3Player = new MP3Player();
-
 	private JFrame frame;
-	private File file;
-	private int result = 0;
+	public JTextField txtPlaying;
+	PlayerMethods playerMethods = new PlayerMethods();
 
 	/**
 	 * Launch the application.
@@ -59,7 +42,7 @@ public class ViewClass {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.BLACK);
-		frame.setBounds(100, 100, 520, 98);
+		frame.setBounds(100, 100, 516, 130);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 				
@@ -67,58 +50,60 @@ public class ViewClass {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mp3Player.play();
+				playerMethods.play();
+				txtPlaying.setText("Playing: " + playerMethods.getFile().getName());
 			}
 		});
 		btnPlay.setBackground(Color.GRAY);
 		btnPlay.setIcon(new ImageIcon(ViewClass.class.getResource("/resources/play.jpg")));
-		btnPlay.setBounds(6, 16, 117, 41);
+		btnPlay.setBounds(6, 48, 117, 41);
 		frame.getContentPane().add(btnPlay);
 		
 		// pause button
 		JButton btnPause = new JButton("Pause");
 		btnPause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mp3Player.pause();
+				playerMethods.pause();
+				txtPlaying.setText("Paused: " + playerMethods.getFile().getName());
 			}
 		});
 		btnPause.setBackground(Color.GRAY);
 		btnPause.setIcon(new ImageIcon(ViewClass.class.getResource("/resources/pause.jpg")));
-		btnPause.setBounds(135, 16, 117, 41);
+		btnPause.setBounds(135, 48, 117, 41);
 		frame.getContentPane().add(btnPause);
 		
 		// browse button
 		JButton btnBrowse = new JButton("Browse");
 		
-		String userDir = System.getProperty("user.home");
-		JFileChooser fc = new JFileChooser(userDir);
-		
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fc.showOpenDialog(null);
-				if (result == JFileChooser.APPROVE_OPTION) {
-					file = fc.getSelectedFile();
-					mp3Player.stop();
-					mp3Player = new MP3Player(file);
-					mp3Player.addToPlayList(file);
-					System.out.println(file.getName());
-					}
-				}
+				playerMethods.browse();
+				txtPlaying.setText("Playing: " + playerMethods.getFile().getName());
+			}
 		});
 		btnBrowse.setBackground(Color.GRAY);
 		btnBrowse.setIcon(new ImageIcon(ViewClass.class.getResource("/resources/browse.jpg")));
-		btnBrowse.setBounds(393, 16, 117, 41);
+		btnBrowse.setBounds(393, 48, 117, 41);
 		frame.getContentPane().add(btnBrowse);
 		
 		// stop button
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mp3Player.stop();
+				playerMethods.stop();
+				txtPlaying.setText("Stopped: " + playerMethods.getFile().getName());
 			}
 		});
-		btnStop.setBounds(264, 16, 117, 41);
+		btnStop.setBounds(264, 48, 117, 41);
 		btnStop.setIcon(new ImageIcon(ViewClass.class.getResource("/resources/stop.jpg")));
 		frame.getContentPane().add(btnStop);
+		
+		txtPlaying = new JTextField();
+		txtPlaying.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPlaying.setEditable(false);
+		txtPlaying.setBounds(115, 14, 281, 26);
+		txtPlaying.setText("Welcome to MusicPlayer!");
+		frame.getContentPane().add(txtPlaying);
+		txtPlaying.setColumns(10);
 	}
 }
