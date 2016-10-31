@@ -9,6 +9,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+/**
+ * 
+ * @author celepm
+ * ViewClass contains the GUI for mp3Player
+ *
+ */
 public class ViewClass {
 	private JFrame frame;
 	public JTextField txtPlaying;
@@ -47,7 +53,9 @@ public class ViewClass {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 				
-		// play button
+		/**
+		 * play button for playing files using a method from PlayerMethods
+		 */
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -60,7 +68,9 @@ public class ViewClass {
 		btnPlay.setBounds(6, 48, 117, 41);
 		frame.getContentPane().add(btnPlay);
 		
-		// pause button
+		/**
+		 * pause button for pausing files using a method from PlayerMethods
+		 */
 		JButton btnPause = new JButton("Pause");
 		btnPause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -73,7 +83,9 @@ public class ViewClass {
 		btnPause.setBounds(135, 48, 117, 41);
 		frame.getContentPane().add(btnPause);
 		
-		// browse button
+		/**
+		 * browse button for browsing files using a method from PlayerMethods
+		 */
 		JButton btnBrowse = new JButton("Browse");
 		
 		btnBrowse.addActionListener(new ActionListener() {
@@ -87,7 +99,9 @@ public class ViewClass {
 		btnBrowse.setBounds(393, 48, 117, 41);
 		frame.getContentPane().add(btnBrowse);
 		
-		// stop button
+		/**
+		 * stop button for stopping files using a method from PlayerMethods
+		 */
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -99,6 +113,9 @@ public class ViewClass {
 		btnStop.setIcon(new ImageIcon(ViewClass.class.getResource("/resources/stop.jpg")));
 		frame.getContentPane().add(btnStop);
 		
+		/**
+		 * setting text for a text-field
+		 */
 		txtPlaying = new JTextField();
 		txtPlaying.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPlaying.setEditable(false);
