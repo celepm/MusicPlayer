@@ -1,3 +1,5 @@
+package com.main;
+import com.classes.ViewClass;
 
 public class Main {
 

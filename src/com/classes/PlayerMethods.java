@@ -1,5 +1,9 @@
+package com.classes;
 import java.io.File;
 import javax.swing.JFileChooser;
+
+import com.interfaces.PlayerInterface;
+
 import jaco.mp3.player.MP3Player;
 
 public class PlayerMethods implements PlayerInterface {
